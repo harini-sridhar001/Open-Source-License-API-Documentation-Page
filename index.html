@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OSLI API Documentation</title>
+
+<style>
+:root {
+  --dark-blue: #0d1b2a;
+  --lightest-blue: #cceeff;
+  --sky-blue: #b3e5fc;
+  --maroon: #800000;
+  --black: #111827;
+  --gray: #4b5563;
+  --bg: #fffbea;
+  --light-maroon: #f5d6d6;
+  --dark-orange: #c2410c;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:-apple-system,BlinkMacSystemFont,sans-serif; background:var(--bg); color:var(--black); line-height:1.6; display:flex; }
+a { text-decoration:none; color:inherit; }
+a:hover { color: var(--dark-orange); }
+
+/* Sidebar */
+.sidebar {
+  width:250px; 
+  background: var(--lightest-blue);
+  border-right:1px solid var(--gray); 
+  padding:20px; 
+  position:sticky; 
+  top:0; 
+  height:100vh; 
+  overflow-y:auto;
+  border-radius:10px;
+  box-shadow: 2px 0 12px rgba(0,0,0,0.18);
+}
+.sidebar h2 { color: var(--maroon); margin-bottom:10px; }
+.sidebar a { display:block; margin:8px 0; color:var(--black); font-weight:500; }
+.sidebar a:hover { color: var(--dark-orange); }
+
+/* Main Content */
+.main { flex:1; padding:50px 30px; max-width:900px; margin:auto; }
+header { text-align:center; margin-bottom:40px; }
+header h1 { font-size:3rem; color: var(--maroon); margin-bottom:10px; }
+header p { font-size:1.2rem; max-width:700px; margin:auto; }
+
+.buttons { margin-top:20px; text-align:center; }
+.button.primary {
+  display:inline-block;
+  font-size:1.2rem;
+  font-weight:bold;
+  padding:12px 25px;
+  border-radius:10px;
+  background: var(--sky-blue);
+  color: var(--dark-blue);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+.button.primary:hover {
+  background: #80d0ff;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.35);
+}
+
+/* Info box */
+.info-box {
+  background: #d0f0ff; /* lighter blue */
+  border-radius: 12px;
+  padding:20px;
+  margin-bottom:25px;
+  box-shadow: 2px 2px 12px rgba(0,0,0,0.12);
+}
+.info-box-maroon {
+  background: var(--light-maroon);
+  border-radius:12px;
+  padding:20px;
+  margin-top:25px;
+  margin-bottom:25px;
+  font-style: italic;
+}
+
+/* Sections */
+section {
+  padding: 30px 20px;
+  max-width:900px;
+  margin: 20px auto 0 auto;
+}
+h2 { color: var(--maroon); border-bottom:3px solid var(--dark-orange); padding-bottom:5px; margin-bottom:15px; text-shadow: 1px 1px 2px rgba(0,0,0,0.15);}
+h3 { color: var(--dark-orange); margin-bottom:10px; }
+h4 { color: var(--maroon); margin-bottom:10px; }
+.title-example { font-weight:bold; color:black; margin-bottom:5px; }
+
+/* Endpoint cards */
+.card { background: var(--light-maroon); padding:20px; border-radius:12px; margin-bottom:20px; border-left:5px solid var(--maroon); box-shadow:0 3px 10px rgba(0,0,0,0.05); }
+.method { display:inline-block; padding:2px 8px; border-radius:4px; font-weight:bold; color:white; margin-right:10px; font-size:0.9rem; }
+.GET { background:#6b7280; }
+.POST { background:var(--maroon); }
+.path { font-family:monospace; color:var(--dark-orange); }
+
+/* Tables */
+table { width:100%; border-collapse: collapse; margin:15px 0; }
+th, td { border:1px solid #ddd; padding:8px; text-align:left; }
+th { background: var(--dark-orange); color:white; }
+
+/* Code blocks */
+pre, code { background:var(--light-maroon); color:var(--maroon); padding:15px; border-radius:10px; overflow-x:auto; font-family:monospace; margin-bottom:20px; border-left:5px solid var(--maroon); }
+
+/* Footer */
+footer { background:black; color:white; text-align:center; padding:30px; margin-top:40px; }
+</style>
+</head>
+
+<body>
+<div class="sidebar">
+  <h2>OSLI Docs</h2>
+  <a href="#introduction">Introduction</a>
+  <a href="#info">API Info</a>
+  <a href="#discovery">Discovery & Research</a>
+  <a href="#risk">Risk & Compliance</a>
+  <a href="#automation">Automation & DevTools</a>
+  <a href="#python-quickstart">Python Quickstart</a>
+  <a href="#errors">Error Handling</a>
+  <a href="#innovation">Innovation</a>
+</div>
+
+<div class="main">
+<header>
+<h1>📜 OSLI API 📜</h1>
+<p>Open Source License Intelligence API</p>
+<div class="buttons">
+<a href="https://open-source-license-api.onrender.com/docs#/" class="button primary" target="_blank"> Try API Live </a>
+</div>
+</header>
+
+<section id="introduction">
+<h2>Introduction</h2>
+<div class="info-box-maroon">
+<p><em>OSLI is an intelligent compliance engine designed to bridge the gap between complex open-source legal jargon and real-world developer workflows. By combining deterministic SPDX data (State) with Gemini AI reasoning (Intelligence), OSLI provides a developer experience that is predictable, correct, and delightful.</em></p>
+</div>
+</section>
+
+<section id="info">
+<div class="info-box">
+<p>The OSLI API is deployed and ready for use.<br><br>
+You can explore the interactive documentation and test endpoints directly from your browser.</p>
+<p><strong>Base API URL:</strong><br> https://open-source-license-api.onrender.com<br></p>
+<p>The following are key API endpoints you can interact with for various tasks.</p>
+</div>
+</section>
+
+<section id="discovery">
+<h2>🔍 Discovery & Research</h2>
+
+<div class="card">
+<h4><span class="method POST">POST</span> <span class="path">/v1/search</span> — Smart Library Search</h4>
+<p>Discover libraries that meet your licensing requirements. Enter a natural language query and OSLI will return libraries compatible with your project’s policies.</p>
+<div class="title-example">cURL Example</div>
+<pre>
+curl -X POST "https://open-source-license-api.onrender.com/v1/search" \
+-H "Content-Type: application/json" \
+-d '{ "query": "Chart library for closed source" }'
+</pre>
+<div class="title-example">Python Example</div>
+<pre>
+import requests
+data = {"query": "Chart library for closed source"}
+resp = requests.post("https://open-source-license-api.onrender.com/v1/search", json=data)
+print(resp.json())
+</pre>
+<div class="title-example">Expected JSON Response</div>
+<pre>
+{
+  "libraries": [
+    {"name": "Highcharts", "license": "Commercial", "risk_score": "High"},
+    {"name": "Chart.js", "license": "MIT", "risk_score": "Low"}
+  ]
+}
+</pre>
+</div>
+
+<div class="card">
+<h4><span class="method POST">POST</span> <span class="path">/v1/alternatives</span> — Safe-Alternative Finder</h4>
+<p>Find permissive alternatives to restrictive libraries (e.g., MIT instead of GPL), reducing legal risk while maintaining functionality.</p>
+<div class="title-example">cURL Example</div>
+<pre>
+curl -X POST "https://open-source-license-api.onrender.com/v1/alternatives" \
+-H "Content-Type: application/json" \
+-d '{ "package_name": "highcharts", "desired_license": "MIT" }'
+</pre>
+<div class="title-example">Python Example</div>
+<pre>
+import requests
+data = {"package_name": "highcharts", "desired_license": "MIT"}
+resp = requests.post("https://open-source-license-api.onrender.com/v1/alternatives", json=data)
+print(resp.json())
+</pre>
+<div class="title-example">Expected JSON Response</div>
+<pre>
+{
+  "alternatives": [
+    {"name": "Chart.js", "license": "MIT"},
+    {"name": "ECharts", "license": "Apache-2.0"}
+  ]
+}
+</pre>
+</div>
+
+<div class="card">
+<h4><span class="method GET">GET</span> <span class="path">/v1/licenses/{id}</span> — Deep-Dive License Info</h4>
+<p>Retrieve detailed metadata for a specific SPDX license, including permissions, conditions, and obligations.</p>
+<div class="title-example">cURL Example</div>
+<pre>
+curl -X GET "https://open-source-license-api.onrender.com/v1/licenses/MIT"
+</pre>
+<div class="title-example">Python Example</div>
+<pre>
+import requests
+resp = requests.get("https://open-source-license-api.onrender.com/v1/licenses/MIT")
+print(resp.json())
+</pre>
+<div class="title-example">Expected JSON Response</div>
+<pre>
+{
+  "id": "MIT",
+  "name": "MIT License",
+  "permissions": ["commercial-use", "modification", "distribution"],
+  "conditions": ["include-license"],
+  "limitations": ["liability", "warranty"]
+}
+</pre>
+</div>
+</section>
+
+<section id="risk">
+<h2>🛡 Risk & Compliance</h2>
+
+<div class="card">
+<h4><span class="method POST">POST</span> <span class="path">/v1/analyze</span> — Analyze Package Risk</h4>
+<div class="title-example">cURL Example</div>
+<pre>
+curl -X POST "https://open-source-license-api.onrender.com/v1/analyze" \
+-H "Content-Type: application/json" \
+-d '{ "package_name": "mongodb", "context": "Commercial closed-source SaaS" }'
+</pre>
+<div class="title-example">Python Example</div>
+<pre>
+import requests
+data = {"package_name": "mongodb", "context": "Commercial closed-source SaaS"}
+resp = requests.post("https://open-source-license-api.onrender.com/v1/analyze", json=data)
+print(resp.json())
+</pre>
+<div class="title-example">Expected JSON Response</div>
+<pre>
+{
+  "package_name": "mongodb",
+  "risk_score": "Medium",
+  "issues": ["Server-side GPL dependencies"]
+}
+</pre>
+</div>
+
+<div class="card">
+<h4><span class="method POST">POST</span> <span class="path">/v1/audit</span> — Audit Dependencies</h4>
+<div class="title-example">cURL Example</div>
+<pre>
+curl -X POST "https://open-source-license-api.onrender.com/v1/audit" \
+-H "Content-Type: application/json" \
+-d '{ "dependencies": ["react", "lodash", "ffmpeg"] }'
+</pre>
+<div class="title-example">Python Example</div>
+<pre>
+import requests
+data = {"dependencies": ["react", "lodash", "ffmpeg"]}
+resp = requests.post("https://open-source-license-api.onrender.com/v1/audit", json=data)
+print(resp.json())
+</pre>
+<div class="title-example">Expected JSON Response</div>
+<pre>
+{
+  "audit": {
+    "react": "Low Risk",
+    "lodash": "Low Risk",
+    "ffmpeg": "High Risk"
+  }
+}
+</pre>
+</div>
+
+<div class="card">
+<h4><span class="method POST">POST</span> <span class="path">/v1/compatibility-check</span> — Compatibility Check</h4>
+<div class="title-example">cURL Example</div>
+<pre>
+curl -X POST "https://open-source-license-api.onrender.com/v1/compatibility-check" \
+-H "Content-Type: application/json" \
+-d '{ "license_a": "MIT", "license_b": "GPL-3.0" }'
+</pre>
+<div class="title-example">Python Example</div>
+<pre>
+import requests
+data = {"license_a": "MIT", "license_b": "GPL-3.0"}
+resp = requests.post("https://open-source-license-api.onrender.com/v1/compatibility-check", json=data)
+print(resp.json())
+</pre>
+<div class="title-example">Expected JSON Response</div>
+<pre>
+{
+  "license_a": "MIT",
+  "license_b": "GPL-3.0",
+  "compatible": false,
+  "conflict": "GPL-3.0 is viral, incompatible with MIT in commercial SaaS"
+}
+</pre>
+</div>
+
+<div class="card">
+<h4><span class="method POST">POST</span> <span class="path">/v1/resolve-conflicts</span> — Legal Patch Suggester</h4>
+<div class="title-example">cURL Example</div>
+<pre>
+curl -X POST "https://open-source-license-api.onrender.com/v1/resolve-conflicts" \
+-H "Content-Type: application/json" \
+-d '{ "package_a": "ffmpeg", "package_b": "highcharts" }'
+</pre>
+<div class="title-example">Python Example</div>
+<pre>
+import requests
+data = {"package_a": "ffmpeg", "package_b": "highcharts"}
+resp = requests.post("https://open-source-license-api.onrender.com/v1/resolve-conflicts", json=data)
+print(resp.json())
+</pre>
+<div class="title-example">Expected JSON Response</div>
+<pre>
+{
+  "resolution_suggestions": ["Replace ffmpeg with alternative LGPL library", "Use Chart.js instead of Highcharts"]
+}
+</pre>
+</div>
+</section>
+
+<section id="automation">
+<h2>⌨ Automation & DevTools</h2>
+
+<div class="card">
+<h4><span class="method POST">POST</span> <span class="path">/v1/generate-header</span> — License Header Generator</h4>
+<div class="title-example">cURL Example</div>
+<pre>
+curl -X POST "https://open-source-license-api.onrender.com/v1/generate-header" \
+-H "Content-Type: application/json" \
+-d '{ "project_name": "Nebula", "license_id": "MIT", "language": "Python" }'
+</pre>
+<div class="title-example">Python Example</div>
+<pre>
+import requests
+data = {"project_name": "Nebula", "license_id": "MIT", "language": "Python"}
+resp = requests.post("https://open-source-license-api.onrender.com/v1/generate-header", json=data)
+print(resp.json())
+</pre>
+<div class="title-example">Expected JSON Response</div>
+<pre>
+{
+  "file_name": "Nebula_license_header.py",
+  "header_content": "# MIT License\\n# Project: Nebula\\n# Generated by OSLI API"
+}
+</pre>
+</div>
+</section>
+
+<section id="python-quickstart">
+<h2>🐍 Python Quickstart</h2>
+<p>To get started with the OSLI API in Python, ensure you have the <code>requests</code> library installed:</p>
+<pre>pip install requests</pre>
+<p>Copy and paste this script to test the connection to the OSLI engine:</p>
+<pre>
+import requests
+import json
+
+BASE_URL = "https://open-source-license-api.onrender.com"
+
+def osli_quickstart_demo():
+    print("🚀 Connecting to OSLI Compliance Engine...\n")
+
+    search_payload = {"query": "Modern UI component library for a commercial SaaS"}
+    search_res = requests.post(f"{BASE_URL}/v1/search", json=search_payload)
+    if search_res.status_code == 200:
+        print("🔍 AI-Suggested Libraries:")
+        print(json.dumps(search_res.json(), indent=2))
+    
+    audit_payload = {"dependencies": ["react", "lodash", "ffmpeg", "mongodb"]}
+    audit_res = requests.post(f"{BASE_URL}/v1/audit", json=audit_payload)
+    if audit_res.status_code == 200:
+        print("🛡️ Dependency Audit (Traffic Light System):")
+        print(json.dumps(audit_res.json(), indent=2))
+
+if __name__ == "__main__":
+    try:
+        osli_quickstart_demo()
+    except Exception as e:
+        print(f"❌ Connection Error: {e}")
+</pre>
+</section>
+
+<section id="errors">
+<h2>⚠️ Error Handling & Correctness</h2>
+<ul>
+<li><strong>200 OK:</strong> Request successful</li>
+<li><strong>400 Bad Request:</strong> Missing parameters or invalid JSON</li>
+<li><strong>404 Not Found:</strong> Package not found in registry</li>
+<li><strong>500 Internal Server Error:</strong> AI or registry issue</li>
+</ul>
+</section>
+
+<section id="innovation">
+<h2>💡 Innovation & Utility</h2>
+<div class="info-box-maroon">
+<p><em>OSLI uses Stateful Data (the SPDX database) to ensure legal correctness, and Generative AI to provide human-readable strategy.</em></p>
+</div>
+</section>
+</div>
+</body>
+</html>
